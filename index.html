@@ -1,62 +1,113 @@
 <!DOCTYPE html>
-<html lang="pl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To do list</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/cbb46f640a.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script src="script.js"></script>
-</head>
+    <script src="cookies.js"></script>
+  </head>
 
-<body>
+  <body>
     <div class="container container--with-border">
-        <div class="row">
-            <div class="col-sm-12 col-md-8 col-md-offset-2">
-                <section class="todo-app">
-                    <div class="panel panel-default add-todo-panel">
-                        <div class="panel-heading">
-                            To do list
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="todo-input" placeholder="title of task..." required>
-                                </div>
-                                <div class="col-sm-2">
-                                    <button type="submit" class="btn btn-block btn-success" id="add-todo-btn" onclick="toDo.start()">
-                                        Add new
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <button type="button" class="btn btn-block btn-primary" id="finished" onclick="toDo.sortToDo(this.id)">
-                                        Finished
-                                    </button>
-                                </div>
-                                <div class="col-sm-4">
-                                    <button type="button" class="btn btn-block btn-danger" id="notFinished" onclick="toDo.sortToDo(this.id)">
-                                        Not Finished
-                                    </button>
-                                </div>
-                                <div class="col-sm-4">
-                                    <button type="button" class="btn btn-block btn-warning" id="inProgress" onclick="toDo.sortToDo()">
-                                        All
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div></div>
-                    <div id="todo-list-root">
-                    </div>
-                </section>
+      <div class="row">
+        <div class="col-sm-12 col-md-8 col-md-offset-2">
+          <section class="todo-app">
+            <div class="panel panel-default add-todo-panel">
+              <div class="panel-heading">
+                To do list
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-10">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="todo-input"
+                      placeholder="title of task..."
+                      required
+                    />
+                  </div>
+                  <div class="col-sm-2">
+                    <button
+                      type="submit"
+                      class="btn btn-block btn-success"
+                      id="add-todo-btn"
+                      onclick="toDo.start();"
+                    >
+                      Add new
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <button
+                      type="button"
+                      class="btn btn-block btn-primary"
+                      id="finished"
+                      onclick="toDo.sortToDo(this.id)"
+                    >
+                      Finished
+                    </button>
+                  </div>
+                  <div class="col-sm-4">
+                    <button
+                      type="button"
+                      class="btn btn-block btn-danger"
+                      id="notFinished"
+                      onclick="toDo.sortToDo(this.id)"
+                    >
+                      Not Finished
+                    </button>
+                  </div>
+                  <div class="col-sm-4">
+                    <button
+                      type="button"
+                      class="btn btn-block btn-warning"
+                      id="inProgress"
+                      onclick="toDo.sortToDo()"
+                    >
+                      All
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div id="todo-list-root"></div>
+            </div>
+          </section>
         </div>
+      </div>
     </div>
-</body></html>
+    <script>
+
+// window.addEventListener('DOMContentLoaded', (event) => {
+//     checkCookie();
+// });
+      var target = $("#todo-list-root").get(0);
+
+      var observer = new MutationObserver( mutations => 
+            mutations.forEach(mutation => 
+                mutation ? cookieElements() : ""
+            )
+      );
+
+      var config = {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      };
+
+      observer.observe(target, config);
+    </script>
+  </body>
+</html>

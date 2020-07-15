@@ -156,8 +156,7 @@ var toDo = {
         let object;
         let setDate = toDo.cdate();
         var structure = object =>
-            object = `<div id="todo-list-root">
-                            <div class="panel panel-default add-todo-panel status" name="status` + itemId + `" id="box` + itemId + `">
+            object = `<div class="panel panel-default add-todo-panel status" name="status` + itemId + `" id="box` + itemId + `">
                                 <div class="panel-heading">
                                     <div class="todo-title">` + content + `</div>
                                     <div class="todo-icons">
@@ -183,8 +182,7 @@ var toDo = {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>`;
+                        </div>`;
         $("#todo-list-root").append(structure(object));
         $(".area" + itemId).css("display", "none");
         $("#confirm" + itemId).css("display", "none");
