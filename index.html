@@ -61,12 +61,11 @@
     </div>
   </div>
   </div>
-  <!-- <script src="cookies.js"></script> -->
   <script>
-    const todos = JSON.parse(localStorage.getItem("todos"));
+    const todo = JSON.parse(localStorage.getItem("todo"));
 
-    if (todos) {
-      todos.forEach(todo => {
+    if (todo) {
+      todo.forEach(todo => {
         toDo.start(todo.text, todo.status);
       })
     }

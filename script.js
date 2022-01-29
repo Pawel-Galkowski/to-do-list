@@ -1,14 +1,13 @@
 let itemStatus = false;
 const toDo = {
   start: (item, status) => {
-    // start function
-    let info = toDo.getToDo();
+    const info = toDo.getToDo();
     if (item) {
       info = item;
     }
 
     if (info !== "") {
-      let taskId = toDo.counter();
+      const taskId = toDo.counter();
       try {
         toDo.structureTab(taskId, info);
       } catch (err) {
@@ -23,65 +22,59 @@ const toDo = {
   },
 
   stateUpdate: function () {
-    const todosNum = document.getElementsByClassName("toDoClass");
-    const todosEl = [];
-    
+    const todoNum = document.getElementsByClassName("toDoClass");
+    const todoEl = [];
 
-    for(let i=0; i<todosNum.length; i++) {
+    for (let i = 0; i < todoNum.length; i++) {
       const task = document.getElementById("text" + i);
       const box = document.getElementById("box" + i);
       if (task !== null) {
-        todosEl.push(task.innerHTML);
+        todoEl.push(task.innerHTML);
         itemStatus = box.classList.contains("end");
       }
-    };
-    const todos = [];
+    }
+    const todo = [];
 
-    todosEl.forEach((todoEl) => {
-      todos.push({
+    todoEl.forEach((todoEl) => {
+      todo.push({
         text: todoEl,
         status: itemStatus,
       });
     });
     itemStatus = false;
 
-    localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("todo", JSON.stringify(todo));
   },
 
-  // get data from input
   getToDo: () => {
-    let data;
-    var getData = (data) => (data = $("#todo-input").val());
+    const data;
+    const getData = (data) => (data = $("#todo-input").val());
     return getData(data);
   },
 
   base: 0, // base num to counter of tasks
 
-  // couter
   counter: function () {
-    var task_id = this.base++;
+    const task_id = this.base++;
     return task_id;
   },
 
-  // clear input file from used data
   clearInput: () => {
-    let data;
-    let goData = (data) => (data = $("#todo-input").val(""));
+    const data;
+    const goData = (data) => (data = $("#todo-input").val(""));
     goData(data);
   },
 
-  // delete task
   deleteInput: (num) => {
-    let number = toDo.taskNum(num);
+    const number = toDo.taskNum(num);
     if (confirm("Are you sure you want to delete task")) {
       $("#box" + number).remove();
     }
     toDo.stateUpdate();
   },
 
-  //get taskNumber
   taskNum: (information) => {
-    let last = information.length - 1;
+    const last = information.length - 1;
     return information.charAt(last);
   },
 
@@ -98,29 +91,26 @@ const toDo = {
     toDo.stateUpdate();
   },
 
-  // show checked inputs
   checkAtr: (flow) => {
     var input = $(flow).attr("name");
     let number = toDo.taskNum(input);
     $("#box" + number).css("display", "none");
   },
 
-  // show unchecked inputs
   uncheckAtr: (inflow) => {
     var input = $(inflow).attr("name");
     let number = toDo.taskNum(input);
     $("#box" + number).css("display", "block");
   },
 
-  //get actuall date
-  cdate: () => {
-    let currnetDate = new Date();
-    let month = currnetDate.getMonth();
-    let year = currnetDate.getFullYear();
-    let day = currnetDate.getDay();
-    let hours = currnetDate.getHours();
-    let minutes = currnetDate.getMinutes();
-    let fullDate;
+  date: () => {
+    const currentDate = new Date();
+    const month = currentDate.getMonth();
+    const year = currentDate.getFullYear();
+    const day = currentDate.getDay();
+    const hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
+    const fullDate;
     if (month < 10) month = "0" + month;
     if (day < 10) day = "0" + day;
     if (hours < 10) hours = "0" + hours;
@@ -139,12 +129,11 @@ const toDo = {
     return newDate(fullDate);
   },
 
-  //start edit input
   editInput: (name) => {
-    let number = toDo.taskNum(name);
+    const number = toDo.taskNum(name);
     try {
       if (!$(".area" + number).hasClass("editing")) {
-        let content = $(".text" + number).text();
+        const content = $(".text" + number).text();
         $(".area" + number).addClass("editing");
         $(".area" + number).css("display", "block");
         $("#confirm" + number).css("display", "block");
@@ -156,24 +145,22 @@ const toDo = {
         $("#confirm" + number).css("display", "none");
         $(".area" + number).removeClass("editing");
       }
-      localStorage.setItem("todos", JSON.stringify(todos));
+      localStorage.setItem("todo", JSON.stringify(todo));
     } catch (err) {
       console.log(err.message);
     }
   },
 
-  //finish edit input
   endEdit: (name) => {
-    let number = toDo.taskNum(name);
+    const number = toDo.taskNum(name);
     $(".text" + number).css("display", "block");
-    let content = $(".area" + number).val();
+    const content = $(".area" + number).val();
     $(".text" + number).text(content);
     $(".area" + number).css("display", "none");
     $("#confirm" + number).css("display", "none");
     $(".area" + number).removeClass("editing");
   },
 
-  // sort inputs by checkbox param
   sortToDo: (param) => {
     switch (param) {
       case "finished":
@@ -203,10 +190,9 @@ const toDo = {
     }
   },
 
-  // structure of task
   structureTab: (itemId, content) => {
     let object;
-    let setDate = toDo.cdate();
+    const setDate = toDo.date();
     var structure = (object) =>
       (object =
         `<div class="panel panel-default add-todo-panel status" name="status` +

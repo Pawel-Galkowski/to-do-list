@@ -1,5 +1,5 @@
 # To do list
-To do list version 1.0.3<br/>
+To do list version 1.0.4<br/>
 This version doesn't have cookies support for saving stage.
 
 ## Technology
@@ -9,7 +9,12 @@ This version doesn't have cookies support for saving stage.
     - EcmaScript
 
 ## View
-Live view is available at [this link](https://pawel-galkowski.github.io/to-do-list/).
+Live view is available at this [link](https://pawel-galkowski.github.io/to-do-list/).
 
 ## Usage
-Download and open index.html with browser.
+To use application you need to type
+
+Open **index.html** file in browser
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
